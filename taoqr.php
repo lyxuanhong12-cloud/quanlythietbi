@@ -1,14 +1,19 @@
 <?php
-
 include 'phpqrcode/qrlib.php';
 
-QRcode::png("PC001","qrcode/PC001.png");
-QRcode::png("PC002","qrcode/PC002.png");
-QRcode::png("PC003","qrcode/PC003.png");
-QRcode::png("PR001","qrcode/PR001.png");
-QRcode::png("SC001","qrcode/SC001.png");
-QRcode::png("TV001","qrcode/TV001.png");
+$id = isset($_GET['id']) ? trim($_GET['id']) : '';
+if (!$id) {
+    header('Content-Type: text/plain; charset=UTF-8');
+    echo 'Tham số id không hợp lệ.';
+    exit;
+}
 
-echo "Da tao QR";
+$host = $_SERVER['HTTP_HOST'];
+$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$base = dirname($_SERVER['SCRIPT_NAME']);
+$base = rtrim($base, '/\\');
+$url = sprintf('%s://%s%s/info.php?id=%s', $scheme, $host, $base, urlencode($id));
 
+header('Content-Type: image/png');
+QRcode::png($url, false, QR_ECLEVEL_L, 4);
 ?>

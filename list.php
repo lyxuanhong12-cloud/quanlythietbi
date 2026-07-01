@@ -43,12 +43,14 @@ $result = $conn->query($sql);
                         <th>Mã thiết bị</th>
                         <th>Tên thiết bị</th>
                         <th>Chi tiết</th>
+                        <th>QR Code</th>
                     </tr>
                     <?php while($row = $result->fetch_assoc()): ?>
                     <tr>
                         <td><?php echo $row['ma_thietbi']; ?></td>
                         <td><?php echo $row['ten_thietbi']; ?></td>
-                        <td><a href="info.php?id=<?php echo $row['ma_thietbi']; ?>">Xem</a></td>
+                        <td><a class="button-link" href="info.php?id=<?php echo urlencode($row['ma_thietbi']); ?>">Xem</a></td>
+                        <td><a class="button-link" href="taoqr.php?id=<?php echo urlencode($row['ma_thietbi']); ?>" target="_blank">QR</a></td>
                     </tr>
                     <?php endwhile; ?>
                 </table>

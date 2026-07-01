@@ -201,6 +201,21 @@ th {
   color: var(--primary-dark);
 }
 
+.button-link {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.button-link:hover {
+  background: #1d4ed8;
+}
+
 .badge {
   display: inline-block;
   padding: 6px 10px;
