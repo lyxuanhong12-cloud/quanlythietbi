@@ -1,5 +1,8 @@
 <?php
+include 'auth.php';
+requireLogin();
 $active = 'home';
+$currentUser = currentUser();
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -14,12 +17,13 @@ $active = 'home';
         <div class="topbar">
             <div>
                 <h1>Hệ thống quản lý thiết bị</h1>
-                <p>Giao diện dành cho cán bộ, công chức thao tác nhanh và thuận tiện</p>
+                <p>Xin chào, <?php echo htmlspecialchars($currentUser['fullname'] ?: $currentUser['username']); ?> - <?php echo roleLabel($currentUser['role']); ?></p>
             </div>
             <nav class="topnav">
                 <a class="active" href="index.php">Trang chủ</a>
                 <a href="add.php">Thêm thiết bị</a>
                 <a href="list.php">Danh sách thiết bị</a>
+                <a href="logout.php">Đăng xuất</a>
             </nav>
         </div>
 

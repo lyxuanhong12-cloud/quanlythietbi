@@ -1,5 +1,7 @@
 <?php
 include 'db.php';
+include 'auth.php';
+requireRole(['admin', 'staff']);
 ensureDeviceTableColumns($conn);
 
 $message = '';
@@ -52,6 +54,7 @@ if (isset($_POST['luu'])) {
                 <a href="index.php">Trang chủ</a>
                 <a class="active" href="add.php">Thêm thiết bị</a>
                 <a href="list.php">Danh sách thiết bị</a>
+                <a href="logout.php">Đăng xuất</a>
             </nav>
         </div>
 

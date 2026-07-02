@@ -1,5 +1,7 @@
 <?php
 include 'db.php';
+include 'auth.php';
+requireLogin();
 ensureDeviceTableColumns($conn);
 
 $id = isset($_GET['id']) ? trim($_GET['id']) : '';
@@ -36,6 +38,7 @@ if (!$id) {
                 <a href="index.php">Trang chủ</a>
                 <a href="add.php">Thêm thiết bị</a>
                 <a href="list.php">Danh sách thiết bị</a>
+                <a href="logout.php">Đăng xuất</a>
             </nav>
         </div>
 

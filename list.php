@@ -1,5 +1,7 @@
 <?php
 include 'db.php';
+include 'auth.php';
+requireRole(['admin', 'staff']);
 ensureDeviceTableColumns($conn);
 
 $message = '';
@@ -94,6 +96,7 @@ if ($search !== '') {
                 <a href="index.php">Trang chủ</a>
                 <a href="add.php">Thêm thiết bị</a>
                 <a class="active" href="list.php">Danh sách thiết bị</a>
+                <a href="logout.php">Đăng xuất</a>
             </nav>
         </div>
 
