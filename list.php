@@ -1,9 +1,6 @@
 <?php
-
-$conn = new mysqli("localhost","root","","ql_thietbi");
-if ($conn->connect_error) {
-    die("Lỗi kết nối cơ sở dữ liệu");
-}
+include 'db.php';
+ensureDeviceTableColumns($conn);
 
 $message = '';
 $search = trim(isset($_GET['q']) ? $_GET['q'] : '');
@@ -27,10 +24,22 @@ if (isset($_POST['save_edit'])) {
     $oldId = trim($_POST['edit_id']);
     $newId = trim($_POST['edit_ma']);
     $newName = trim($_POST['edit_ten']);
+    $loai = trim($_POST['edit_loai_thietbi'] ?? '');
+    $hang = trim($_POST['edit_hang_sx'] ?? '');
+    $model = trim($_POST['edit_model'] ?? '');
+    $seri = trim($_POST['edit_so_seri'] ?? '');
+    $ngayMua = trim($_POST['edit_ngay_mua'] ?? '');
+    $giaTri = trim($_POST['edit_gia_tri'] ?? '');
+    $phong = trim($_POST['edit_phong_su_dung'] ?? '');
+    $nguoi = trim($_POST['edit_nguoi_quan_ly'] ?? '');
+    $tinhTrang = trim($_POST['edit_tinh_trang'] ?? '');
+    $ghiChu = trim($_POST['edit_ghi_chu'] ?? '');
+    $hinhAnh = trim($_POST['edit_hinh_anh'] ?? '');
+    $maQr = 'info.php?id=' . $newId;
 
     if ($oldId !== '' && $newId !== '' && $newName !== '') {
-        $stmt = $conn->prepare('UPDATE thietbi SET ma_thietbi = ?, ten_thietbi = ? WHERE ma_thietbi = ?');
-        $stmt->bind_param('sss', $newId, $newName, $oldId);
+        $stmt = $conn->prepare('UPDATE thietbi SET ma_thietbi = ?, ten_thietbi = ?, loai_thietbi = ?, hang_sx = ?, model = ?, so_seri = ?, ngay_mua = ?, gia_tri = ?, phong_su_dung = ?, nguoi_quan_ly = ?, tinh_trang = ?, ghi_chu = ?, hinh_anh = ?, ma_qr = ? WHERE ma_thietbi = ?');
+        $stmt->bind_param('sssssssssssssss', $newId, $newName, $loai, $hang, $model, $seri, $ngayMua, $giaTri, $phong, $nguoi, $tinhTrang, $ghiChu, $hinhAnh, $maQr, $oldId);
         if ($stmt->execute()) {
             $message = '<div class="alert success">Cập nhật thiết bị thành công.</div>';
         } else {
@@ -45,7 +54,7 @@ if (isset($_POST['save_edit'])) {
 if (isset($_GET['edit'])) {
     $editId = trim($_GET['edit']);
     if ($editId !== '') {
-        $stmt = $conn->prepare('SELECT ma_thietbi, ten_thietbi FROM thietbi WHERE ma_thietbi = ?');
+        $stmt = $conn->prepare('SELECT ma_thietbi, ten_thietbi, loai_thietbi, hang_sx, model, so_seri, ngay_mua, gia_tri, phong_su_dung, nguoi_quan_ly, tinh_trang, ghi_chu, hinh_anh, ma_qr FROM thietbi WHERE ma_thietbi = ?');
         $stmt->bind_param('s', $editId);
         $stmt->execute();
         $resultEdit = $stmt->get_result();
@@ -109,13 +118,59 @@ if ($search !== '') {
                 <h3>Sửa thông tin thiết bị</h3>
                 <form method="post" class="form-card">
                     <input type="hidden" name="edit_id" value="<?php echo htmlspecialchars($editDevice['ma_thietbi']); ?>">
-                    <div class="form-row">
-                        <label for="edit_ma">Mã thiết bị</label>
-                        <input type="text" id="edit_ma" name="edit_ma" value="<?php echo htmlspecialchars($editDevice['ma_thietbi']); ?>" required>
-                    </div>
-                    <div class="form-row">
-                        <label for="edit_ten">Tên thiết bị</label>
-                        <input type="text" id="edit_ten" name="edit_ten" value="<?php echo htmlspecialchars($editDevice['ten_thietbi']); ?>" required>
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label for="edit_ma">Mã thiết bị</label>
+                            <input type="text" id="edit_ma" name="edit_ma" value="<?php echo htmlspecialchars($editDevice['ma_thietbi'] ?? ''); ?>" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="edit_ten">Tên thiết bị</label>
+                            <input type="text" id="edit_ten" name="edit_ten" value="<?php echo htmlspecialchars($editDevice['ten_thietbi'] ?? ''); ?>" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="edit_loai_thietbi">Loại thiết bị</label>
+                            <input type="text" id="edit_loai_thietbi" name="edit_loai_thietbi" value="<?php echo htmlspecialchars($editDevice['loai_thietbi'] ?? ''); ?>">
+                        </div>
+                        <div class="form-row">
+                            <label for="edit_hang_sx">Hãng sản xuất</label>
+                            <input type="text" id="edit_hang_sx" name="edit_hang_sx" value="<?php echo htmlspecialchars($editDevice['hang_sx'] ?? ''); ?>">
+                        </div>
+                        <div class="form-row">
+                            <label for="edit_model">Model</label>
+                            <input type="text" id="edit_model" name="edit_model" value="<?php echo htmlspecialchars($editDevice['model'] ?? ''); ?>">
+                        </div>
+                        <div class="form-row">
+                            <label for="edit_so_seri">Số sê-ri</label>
+                            <input type="text" id="edit_so_seri" name="edit_so_seri" value="<?php echo htmlspecialchars($editDevice['so_seri'] ?? ''); ?>">
+                        </div>
+                        <div class="form-row">
+                            <label for="edit_ngay_mua">Ngày mua</label>
+                            <input type="text" id="edit_ngay_mua" name="edit_ngay_mua" value="<?php echo htmlspecialchars($editDevice['ngay_mua'] ?? ''); ?>">
+                        </div>
+                        <div class="form-row">
+                            <label for="edit_gia_tri">Giá trị</label>
+                            <input type="text" id="edit_gia_tri" name="edit_gia_tri" value="<?php echo htmlspecialchars($editDevice['gia_tri'] ?? ''); ?>">
+                        </div>
+                        <div class="form-row">
+                            <label for="edit_phong_su_dung">Phòng sử dụng</label>
+                            <input type="text" id="edit_phong_su_dung" name="edit_phong_su_dung" value="<?php echo htmlspecialchars($editDevice['phong_su_dung'] ?? ''); ?>">
+                        </div>
+                        <div class="form-row">
+                            <label for="edit_nguoi_quan_ly">Người quản lý</label>
+                            <input type="text" id="edit_nguoi_quan_ly" name="edit_nguoi_quan_ly" value="<?php echo htmlspecialchars($editDevice['nguoi_quan_ly'] ?? ''); ?>">
+                        </div>
+                        <div class="form-row">
+                            <label for="edit_tinh_trang">Tình trạng</label>
+                            <input type="text" id="edit_tinh_trang" name="edit_tinh_trang" value="<?php echo htmlspecialchars($editDevice['tinh_trang'] ?? ''); ?>">
+                        </div>
+                        <div class="form-row">
+                            <label for="edit_hinh_anh">Hình ảnh</label>
+                            <input type="text" id="edit_hinh_anh" name="edit_hinh_anh" value="<?php echo htmlspecialchars($editDevice['hinh_anh'] ?? ''); ?>">
+                        </div>
+                        <div class="form-row full-width">
+                            <label for="edit_ghi_chu">Ghi chú</label>
+                            <textarea id="edit_ghi_chu" name="edit_ghi_chu"><?php echo htmlspecialchars($editDevice['ghi_chu'] ?? ''); ?></textarea>
+                        </div>
                     </div>
                     <div class="inline-actions">
                         <input type="submit" name="save_edit" value="Lưu thay đổi">
