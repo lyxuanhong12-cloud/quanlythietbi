@@ -36,6 +36,7 @@ if (!$id) {
             </div>
             <nav class="topnav">
                 <a href="index.php">Trang chủ</a>
+                <a href="dashboard.php">Thống kê</a>
                 <a href="add.php">Thêm thiết bị</a>
                 <a href="list.php">Danh sách thiết bị</a>
                 <a href="logout.php">Đăng xuất</a>

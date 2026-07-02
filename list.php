@@ -94,6 +94,7 @@ if ($search !== '') {
             </div>
             <nav class="topnav">
                 <a href="index.php">Trang chủ</a>
+                <a href="dashboard.php">Thống kê</a>
                 <a href="add.php">Thêm thiết bị</a>
                 <a class="active" href="list.php">Danh sách thiết bị</a>
                 <a href="logout.php">Đăng xuất</a>
@@ -110,6 +111,11 @@ if ($search !== '') {
             </div>
 
             <?php echo $message; ?>
+
+            <div class="inline-actions" style="margin-bottom: 16px;">
+                <a class="button-link" href="export_excel.php">Xuất Excel</a>
+                <a class="button-link secondary" href="export_excel.php?format=csv">Xuất CSV</a>
+            </div>
 
             <form method="get" class="search-row">
                 <input class="search-input" type="text" name="q" value="<?php echo htmlspecialchars($search); ?>" placeholder="Tìm theo mã hoặc tên thiết bị">
