@@ -65,6 +65,10 @@ if (!$id) {
                     <div class="form-row">
                         <label>QR code truy cập</label>
                         <img src="taoqr.php?id=<?php echo urlencode($device['ma_thietbi']); ?>" alt="QR code thiết bị">
+                        <div class="inline-actions" style="margin-top: 8px;">
+                            <a class="button-link" href="taoqr.php?id=<?php echo urlencode($device['ma_thietbi']); ?>" target="_blank">Xem QR</a>
+                            <a class="button-link secondary" href="taoqr.php?id=<?php echo urlencode($device['ma_thietbi']); ?>&download=1" download="qr_<?php echo urlencode($device['ma_thietbi']); ?>.png">Tải về</a>
+                        </div>
                         <p class="small">Quét mã để mở trang chi tiết thiết bị trên điện thoại.</p>
                     </div>
                 </div>

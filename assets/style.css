@@ -201,6 +201,23 @@ th {
   color: var(--primary-dark);
 }
 
+.search-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.search-input {
+  max-width: 360px;
+}
+
+.inline-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 .button-link {
   display: inline-block;
   padding: 8px 12px;
@@ -214,6 +231,33 @@ th {
 
 .button-link:hover {
   background: #1d4ed8;
+}
+
+.button-link.secondary {
+  background: #6b7280;
+}
+
+.button-link.secondary:hover {
+  background: #4b5563;
+}
+
+.button-link.danger {
+  background: #dc2626;
+}
+
+.button-link.danger:hover {
+  background: #b91c1c;
+}
+
+.inner-card {
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--muted);
+  padding: 20px 10px;
 }
 
 .badge {
