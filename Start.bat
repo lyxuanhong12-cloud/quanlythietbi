@@ -7,10 +7,17 @@ for %%I in ("%PARENT1%..") do set "XAMPP_ROOT=%%~fI"
 
 set "PORT=3000"
 set "HOST=0.0.0.0"
+set "SERVER_IP=localhost"
 set "PHP_EXE=%XAMPP_ROOT%\php\php.exe"
 set "MYSQL_EXE=%XAMPP_ROOT%\mysql\bin\mysqld.exe"
 set "MYSQL_CLIENT=%XAMPP_ROOT%\mysql\bin\mysql.exe"
 set "MYSQL_INI=%XAMPP_ROOT%\mysql\bin\my.ini"
+
+if exist "%ROOT%server_ip.txt" (
+    set /p SERVER_IP=<"%ROOT%server_ip.txt"
+)
+
+if not defined SERVER_IP set "SERVER_IP=localhost"
 
 if not exist "%PHP_EXE%" (
     echo Khong tim thay PHP trong XAMPP.
@@ -24,7 +31,7 @@ if not exist "%MYSQL_EXE%" (
 
 cd /d "%ROOT%"
 
-start "" "http://localhost:%PORT%/"
+start "" "http://%SERVER_IP%:%PORT%/"
 
 start "" "%MYSQL_EXE%" --defaults-file="%MYSQL_INI%" --standalone --console
 

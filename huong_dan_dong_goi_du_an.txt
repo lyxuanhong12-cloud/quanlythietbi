@@ -1,0 +1,40 @@
+HƯỚNG DẪN ĐÓNG GÓI DỰ ÁN CHO MÁY CHỦ KHÁC (OFFLINE)
+
+1. Mục đích
+- Đóng gói dự án để cài đặt trên máy chủ khác trong mạng nội bộ mà không cần kết nối Internet.
+
+2. Những thứ cần chuẩn bị
+- Toàn bộ thư mục dự án: C:\xampp\htdocs\qlthietbi
+- File cơ sở dữ liệu MySQL của hệ thống (database ql_thietbi)
+- File cấu hình IP mới: server_ip.txt
+- File tự động đổi IP: update_server_ip.bat
+
+3. Các bước đóng gói
+Bước 1: Sao chép toàn bộ thư mục dự án
+- Copy đầy đủ thư mục qlthietbi sang thư mục mới hoặc nén thành file ZIP.
+
+Bước 2: Xuất cơ sở dữ liệu
+- Mở phpMyAdmin hoặc dùng MySQL client.
+- Xuất database ql_thietbi ra file .sql.
+- Lưu file .sql cùng với thư mục dự án để đưa sang máy chủ mới.
+
+Bước 3: Đảm bảo các file quan trọng có trong gói
+- Start.bat
+- update_server_ip.bat
+- server_ip.txt
+- toàn bộ mã nguồn PHP, thư mục assets, thư mục phpqrcode, qrcode
+
+Bước 4: Nén gói cài đặt
+- Nén toàn bộ thư mục dự án và file SQL vào một file ZIP có tên rõ ràng như:
+  qlthietbi_offline_package.zip
+
+4. Gợi ý khi chuyển sang máy chủ mới
+- Trên máy chủ mới, hãy cài XAMPP trước.
+- Đặt thư mục dự án vào C:\xampp\htdocs\qlthietbi.
+- Import database từ file .sql.
+- Chạy update_server_ip.bat và nhập IP mới của máy chủ.
+- Chạy Start.bat để khởi động hệ thống.
+
+5. Lưu ý quan trọng
+- Nếu hệ thống được truy cập từ các máy tính khác trên mạng nội bộ, cần mở cổng 3000 trong tường lửa của máy chủ.
+- Nếu máy chủ mới có IP thay đổi, chỉ cần chạy lại update_server_ip.bat.

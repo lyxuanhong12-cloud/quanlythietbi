@@ -1,0 +1,59 @@
+HƯỚNG DẪN CÀI ĐẶT DỰ ÁN TRÊN MÁY CHỦ MỚI (OFFLINE)
+
+1. Yêu cầu phần mềm
+- Cài XAMPP (Apache + MySQL + PHP) trên máy chủ mới.
+- Cài trình duyệt web hiện đại như Chrome hoặc Edge.
+- Nếu dùng mạng nội bộ, máy chủ cần có IP tĩnh hoặc IP cố định trong LAN.
+
+2. Cài đặt XAMPP
+- Tải và cài XAMPP trên máy chủ mới.
+- Khi cài đặt, chọn các thành phần:
+  - Apache
+  - MySQL
+  - PHP
+- Sau khi cài xong, khởi động XAMPP Control Panel.
+- Bật Apache và MySQL.
+
+3. Sao chép dự án
+- Copy toàn bộ thư mục dự án vào đường dẫn:
+  C:\xampp\htdocs\qlthietbi
+- Nếu có file nén ZIP, giải nén vào đúng thư mục trên.
+
+4. Tạo hoặc nhập cơ sở dữ liệu
+- Mở phpMyAdmin tại địa chỉ:
+  http://localhost/phpmyadmin
+- Tạo database tên:
+  ql_thietbi
+- Import file .sql đã được export từ máy cũ vào database này.
+
+5. Cập nhật IP máy chủ mới
+- Chạy file:
+  C:\xampp\htdocs\qlthietbi\update_server_ip.bat
+- Nhập IP mới của máy chủ, ví dụ:
+  192.168.1.50
+- Nhấn Enter.
+- File này sẽ ghi IP mới vào server_ip.txt để ứng dụng dùng cho lần chạy tiếp theo.
+
+6. Khởi động hệ thống
+- Vào thư mục dự án.
+- Chạy file Start.bat.
+- Hệ thống sẽ mở trình duyệt tới địa chỉ:
+  http://<IP_MOI>:3000/
+
+7. Truy cập từ các máy khác trong mạng nội bộ
+- Mở trình duyệt trên máy client khác.
+- Gõ đường dẫn:
+  http://<IP_MOI>:3000/
+- Nếu không truy cập được, kiểm tra:
+  - Apache đã chạy
+  - MySQL đã chạy
+  - Cổng 3000 không bị chặn bởi tường lửa
+  - IP máy chủ đúng
+
+8. Tài khoản đăng nhập mặc định
+- Username: admin
+- Password: admin123
+
+9. Lưu ý quan trọng
+- Nếu đổi IP sau này, chỉ cần chạy lại update_server_ip.bat.
+- Nếu dùng máy chủ có IP thay đổi thường xuyên, nên đặt IP tĩnh cho máy chủ.

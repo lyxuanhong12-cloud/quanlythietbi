@@ -10,6 +10,15 @@ if (!$id) {
 
 $host = $_SERVER['HTTP_HOST'];
 $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+
+if (is_file(__DIR__ . '/server_ip.txt')) {
+    $configuredHost = trim(file_get_contents(__DIR__ . '/server_ip.txt'));
+    if ($configuredHost !== '') {
+        $host = $configuredHost;
+        $scheme = 'http';
+    }
+}
+
 $base = dirname($_SERVER['SCRIPT_NAME']);
 $base = rtrim($base, '/\\');
 $url = sprintf('%s://%s%s/info.php?id=%s', $scheme, $host, $base, urlencode($id));
